@@ -19,4 +19,11 @@ public class Musica implements Serializable {
         return this.lyrics;
     }
 
+    public void setTitle(String t){
+        this.title = t;
+    }
+
+    public void setLyrics(String l){
+        this.lyrics = l;
+    }
 }

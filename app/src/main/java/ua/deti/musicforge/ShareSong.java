@@ -2,12 +2,20 @@ package ua.deti.musicforge;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShareSong extends DialogFragment {
 
@@ -16,6 +24,11 @@ public class ShareSong extends DialogFragment {
 
         final EditText caption = new EditText(getActivity());
         final String title=getArguments().getString("title");
+        SharedPreferences pref = this.getActivity().getSharedPreferences("app", Context.MODE_PRIVATE);
+        String my_songs_json = pref.getString("my_songs_JOSE_FRIAS","banana");
+        Gson gson = new Gson();
+        final ArrayList<Musica> my_songs = gson.fromJson(my_songs_json, new TypeToken<List<Musica>>(){}.getType());
+
 
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -28,7 +41,11 @@ public class ShareSong extends DialogFragment {
 
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         intent.putExtra("rpc", 0);
-                        //intent.putExtra("lyric", lyrics.getText().toString());
+                        for(Musica m:my_songs){
+                            if(m.getTitle().equalsIgnoreCase(title)){
+                                intent.putExtra("lyrics", m.getLyrics());
+                            }
+                        }
                         intent.putExtra("title", title);
                         intent.putExtra("caption", caption.getText().toString());
 

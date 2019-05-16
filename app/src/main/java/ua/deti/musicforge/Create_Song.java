@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,10 +26,15 @@ public class Create_Song extends DialogFragment {
                 .setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Intent intent = new Intent(getActivity(), Songs.class);
-                        intent.putExtra("title", title.getText().toString()); // sending the title of the new song
+                        if(title.getText().toString().length()==0){
+                            Toast.makeText(getActivity(), "Song name mustn't be empty", Toast.LENGTH_LONG); // doesnt work but the if itself is a good enough fix
+                        }else {
 
-                        startActivity(intent);
+                            Intent intent = new Intent(getActivity(), Songs.class);
+                            intent.putExtra("title", title.getText().toString()); // sending the title of the new song
+
+                            startActivity(intent);
+                        }
 
                     }
                 })
