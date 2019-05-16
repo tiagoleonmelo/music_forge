@@ -36,67 +36,46 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         int i = 0;
 
-        if(pref.contains("posted_songs")) {
-            posted_songs_json = pref.getString("posted_songs", "");
-            ArrayList<Musica> posted_songs = gson.fromJson(posted_songs_json, new TypeToken<List<Musica>>() {
+        if(pref.contains("posted_songs_v2")) {
+            posted_songs_json = pref.getString("posted_songs_v2", "");
+            ArrayList<Post> posted_songs = gson.fromJson(posted_songs_json, new TypeToken<List<Post>>() {
             }.getType());
 
             if(posted_songs != null) {
                 for( int j = posted_songs.size()-1; j >= 0; j--){
-                    Musica temp = posted_songs.get(j);
-                    onAddField(temp.getTitle(), "Sabado a noite..", temp.getLyrics(), i);
+                    Musica temp = posted_songs.get(j).getM();
+                    onAddField(temp.getTitle(), posted_songs.get(j).getCaption(), temp.getLyrics(), i);
                     i++;
                 }
 
                 posted_songs_json = gson.toJson(posted_songs);
-                pref.edit().putString("posted_songs",posted_songs_json).commit();
+                pref.edit().putString("posted_songs_v2",posted_songs_json).commit();
             }
 
         }else{
-            ArrayList<Musica> posted_songs = new ArrayList<>();
-            posted_songs.add(new Musica("Song", "This should be audio"));
-            posted_songs.add(new Musica("Edgy", "These are some edgy lyrics\nThis is where they belong"));
-            posted_songs.add(new Musica("First of many", "DON'T WANNA CLOSE MY EYES"));
-            posted_songs.add(new Musica(" of many", "DON'T WANNA CLOSE MY EYES"));
-            posted_songs.add(new Musica("First ", "DON'T WANNA CLOSE MY EYES"));
-            posted_songs.add(new Musica("y", "DON'T WANNA CLOSE MY EYES"));
+            ArrayList<Post> posted_songs = new ArrayList<>();
+            posted_songs.add(new Post(new Musica("Song", "This should be audio"), "This is a caption"));
+            posted_songs.add(new Post(new Musica("Edgy", "These are some edgy lyrics\nThis is where they belong"), "Sabado a noite.."));
+            posted_songs.add(new Post(new Musica("First of many", "DON'T WANNA CLOSE MY EYES"), "Segunda a noite.."));
+            posted_songs.add(new Post(new Musica(" of many", "DON'T WANNA CLOSE MY EYES"), "Quarta a noite.."));
+            posted_songs.add(new Post(new Musica("First ", "DON'T WANNA CLOSE MY EYES"), "Pretty good"));
+            posted_songs.add(new Post(new Musica("Darude Sandstorm", "Source needed"), "Good vibes only :P"));
 
             for( int j = posted_songs.size()-1; j >= 0; j--){
-                Musica temp = posted_songs.get(j);
-                onAddField(temp.getTitle(), "Sabado a noite..", temp.getLyrics(), i);
+                Musica temp = posted_songs.get(j).getM();
+                onAddField(temp.getTitle(), posted_songs.get(j).getCaption(), temp.getLyrics(), i);
                 i++;
             }
 
             posted_songs_json = gson.toJson(posted_songs);
-            pref.edit().putString("posted_songs",posted_songs_json).commit();
+            pref.edit().putString("posted_songs_v2",posted_songs_json).commit();
         }
-
-        //TODO: Figure out where should i call this. (I wanna call it whenever ShareSong creates this activity again)
-        /*onAddField("Cool Song", "Aqui está o audio da minha nova música... espero que gostem! Videoclip coming soon! :)","This should be audio");
-        onAddField("Edgy", "Sabado a noite..","These are some edgy lyrics\n This is where they belong");
-        onAddField("First of many", "Bom dia! Aqui está a letra de a minha primeira música nesta plataforma! Sigam se gostarem ;)","DON'T WANNA CLOSE MY EYES");*/
-
-        // Criar a classe post que associa uma musica a uma caption
-
-
-
-        /*rpc = getIntent().getIntExtra("rpc", -1);
-        String title = getIntent().getStringExtra("title");
-        String caption = getIntent().getStringExtra("caption");
-        String lyrics = getIntent().getStringExtra("lyrics");
-
-
-        if(rpc == 0){
-            Toast.makeText(this, "Song Shared successfully!", Toast.LENGTH_LONG).show();
-            posted_songs.add(new Musica(title, lyrics));
-        }*/
 
         //TODO: Associate multiple songs to a user and load different lyrics from different songs
         //TODO: Create the profile page, that has the shared posts from a user
-
-        //TODO V2 : Associate each song w a caption by creating class Post
         // TODO CREATE AN ARRAYLIST CONTAINING ONLY THE SONGS THE USER SHARED
         // TODO profile page
+        // TODO Add AUDIO (mp3), SCRIPT (pdf) and VIDEOCLIP (mp4) to the Songs page (or at least the option to add those files)
 
 
     }
@@ -135,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View card = inflater.inflate(R.layout.card, null);
         card.setId(n);
-        int stuff = card.getId();   // we are always getting the same id.
-        Toast.makeText(this, Integer.toString(stuff), Toast.LENGTH_LONG).show();
 
         // Add the new card before the add field button.
         parentLinearLayout.addView(card, parentLinearLayout.getChildCount());
@@ -147,22 +124,12 @@ public class MainActivity extends AppCompatActivity {
         TextView lyric = card.findViewById(R.id.lyrics);
 
         //if(rpc == 0) {
-        user.setText("Tiago");
+        user.setText("Tiago"); // TODO Add a random name picker here for better feed credibility (don't forget to add user_icons)
         title.setText(title_);
         caption.setText(caption_);
         lyric.setText(lyrics_);
         //}
-        // try to pass as arguments the caption and the components to share
+
     }
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-        // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2)
-        {
-            //do the things u wanted
-            onAddField();
-        }
-    }*/
+
 }

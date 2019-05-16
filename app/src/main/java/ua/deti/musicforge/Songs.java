@@ -104,34 +104,6 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
                     }
                 }
 
-                // fetch the prefs
-                String posted_songs_json = prefs.getString("posted_songs", "");
-                ArrayList<Musica> posted_songs = gson.fromJson(posted_songs_json, new TypeToken<List<Musica>>() {
-                }.getType());
-                posted_songs.add(new Musica(tv.getText().toString(),tv1.getText().toString()));
-                posted_songs_json = gson.toJson(posted_songs);
-                prefs.edit().putString("posted_songs",posted_songs_json).commit();
-
-
-                // unpickle, update and commit both jsons
-                String user_songs_json = prefs.getString("user_songs", "");
-                if(user_songs_json.equalsIgnoreCase("")){
-                    ArrayList<Musica> user_songs = new ArrayList<>();
-                    user_songs.add(new Musica(tv.getText().toString(),tv1.getText().toString()));
-
-                    user_songs_json = gson.toJson(user_songs);
-
-                    prefs.edit().putString("user_songs",user_songs_json).commit();
-                }else{
-                    ArrayList<Musica> user_songs = gson.fromJson(user_songs_json, new TypeToken<List<Musica>>() {
-                    }.getType());
-                    user_songs.add(new Musica(tv.getText().toString(),tv1.getText().toString()));
-
-                    user_songs_json = gson.toJson(user_songs);
-
-                    prefs.edit().putString("user_songs",user_songs_json).commit();
-                }
-
                 ComponentPicker newFragment = new ComponentPicker();
                 Bundle bundle = new Bundle();
 
