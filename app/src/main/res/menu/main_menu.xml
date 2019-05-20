@@ -5,17 +5,20 @@
     <!-- Replace with icons later-->
 
     <item
-        android:id="@+id/profile"
-        android:title="@string/profile"
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@mipmap/glass"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/my_songs"
         android:title="@string/my_songs"
+        android:icon="@mipmap/music"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/settings"
-        android:title="@string/settings"
+        android:id="@+id/profile"
+        android:title="@string/profile"
+        android:icon="@mipmap/contacts"
         app:showAsAction="always" />
 </menu>

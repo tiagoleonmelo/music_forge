@@ -25,7 +25,6 @@ import java.util.List;
 public class Songs extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     ArrayList<Musica> my_songs = new ArrayList<>();
-    ArrayList<String> titles = new ArrayList<>();
     Gson gson = new Gson();
     String my_songs_json = gson.toJson(my_songs);
 
@@ -34,6 +33,7 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_songs);
         final SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
+        final ArrayList<String> titles = new ArrayList<>();
 
         if(prefs.contains("my_songs_JOSE_FRIAS")){ // add a random string here for "consistent" results
             this.my_songs_json = prefs.getString("my_songs_JOSE_FRIAS", "BANANA");
@@ -55,27 +55,12 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
 
         boolean contains = false;
 
-        for(Musica m : this.my_songs){
+        /*for(Musica m : this.my_songs){
             titles.add(m.getTitle());
-        }
+        }*/
 
-        for(Musica m : this.my_songs){
-            if(m.getTitle().equalsIgnoreCase("Create new song...")) {
-                contains = true;
-                break;
-            }
-        }
-
-        if(my_songs.size() == 0 || !contains) {
-            my_songs.add(new Musica("Create new song...",""));
-        }else{
-            for(Musica m : my_songs){
-                if(m.getTitle().equalsIgnoreCase("Create new song...")){
-                    my_songs.remove(m);
-                    break;
-                }
-            }
-            my_songs.add(new Musica("Create new song...","")); // adding it to the bottom of the list
+        for(int i = my_songs.size()-1; i >= 0; i--){
+            titles.add(my_songs.get(i).getTitle());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, titles);
@@ -145,6 +130,16 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
             }
         });
 
+        // Add file buttons
+        Button add_file1 = findViewById(R.id.add_file);
+        Button add_file2 = findViewById(R.id.add_file2);
+        Button add_file3 = findViewById(R.id.add_file3);
+
+        add_file1.setEnabled(false);
+        add_file2.setEnabled(false);
+        add_file3.setEnabled(false);
+
+
     }
 
     @Override
@@ -170,6 +165,11 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
             case R.id.profile:
                 Intent profile = new Intent(Songs.this, Profile.class);
                 startActivity(profile);
+                return true;
+
+            case R.id.settings:
+                Intent search = new Intent(Songs.this, Search.class);
+                startActivity(search);
                 return true;
 
         }

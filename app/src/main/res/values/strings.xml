@@ -29,6 +29,16 @@
 
     <string name="profile">Profile</string>
     <string name="my_songs">My Songs</string>
-    <string name="settings">Settings</string>
+    <string name="settings">Search</string>
     <string name="title_activity_songs">My Songs</string>
+
+    <string name="bio">I enjoy listening to classical music and hitting them with the dab 8) </string>
+    <string name="add_file">Add file</string>
+    <string name="script">Script</string>
+    <string name="video">Videoclip</string>
+
+    <string name="user1">Beethoven</string>
+    <string name="user2">Roberto</string>
+    <string name="user3">Cláudia</string>
+
 </resources>

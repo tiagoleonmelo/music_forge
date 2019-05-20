@@ -27,9 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -122,8 +120,12 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginRight="24dp"
+                    android:fadingEdge="horizontal"
                     android:hint="@string/insert"
-                    android:inputType="textLongMessage|textCapSentences"
+                    android:inputType="textLongMessage|textCapSentences|textImeMultiLine"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="false"
+                    android:textColorLink="@color/design_default_color_primary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lyrics" />
@@ -134,12 +136,71 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/lyrics"
+                    android:layout_marginTop="112dp"
+                    android:text="@string/audio"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button_share" />
+
+                <Button
+                    android:id="@+id/add_file"
+                    android:layout_width="84dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="216dp"
+                    android:layout_marginLeft="216dp"
+                    android:layout_marginTop="188dp"
+                    android:text="@string/add_file"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/song_title" />
+
+                <TextView
+                    android:id="@+id/script"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="196dp"
+                    android:text="@string/script"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_share" />
+
+                <TextView
+                    android:id="@+id/video"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="288dp"
+                    android:text="@string/video"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button_share" />
+
+                <Button
+                    android:id="@+id/add_file2"
+                    android:layout_width="84dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="216dp"
+                    android:layout_marginLeft="216dp"
+                    android:layout_marginTop="280dp"
+                    android:text="@string/add_file"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/song_title" />
+
+                <Button
+                    android:id="@+id/add_file3"
+                    android:layout_width="84dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="216dp"
+                    android:layout_marginLeft="216dp"
+                    android:layout_marginTop="368dp"
+                    android:text="@string/add_file"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/song_title" />
 
             </android.support.constraint.ConstraintLayout>
 
