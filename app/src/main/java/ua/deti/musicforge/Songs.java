@@ -103,23 +103,32 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
             @Override
             public void onClick(View view) {
 
+
+                Conf_delete dialog = new Conf_delete();
+                Bundle bundle = new Bundle();
                 TextView tv = findViewById(R.id.song_title);
-                String removeThis = tv.getText().toString();
 
-                for(Musica m : my_songs){
-                    if(m.getTitle().equals(removeThis)){
-                        my_songs.remove(m);
-                        break;
+
+                // Sending the song title to the new fragment
+                bundle.putString("title", tv.getText().toString());
+                //set Arguments
+                dialog.setArguments(bundle);
+                dialog.setSupport(getSupportFragmentManager());
+                dialog.show(getSupportFragmentManager(), "conf");
+
+/*                    String removeThis = tv.getText().toString();
+
+                    for(Musica m : my_songs){
+                        if(m.getTitle().equals(removeThis)){
+                            my_songs.remove(m);
+                            break;
+                        }
                     }
-                }
 
-                titles.remove(removeThis);
+                    titles.remove(removeThis);
 
-                my_songs_json = gson.toJson(my_songs);
-                prefs.edit().putString("my_songs_JOSE_FRIAS", my_songs_json).commit();
-
-                Intent intent = new Intent(Songs.this, Songs.class); // f5
-                startActivity(intent);
+                    my_songs_json = gson.toJson(my_songs);
+                    prefs.edit().putString("my_songs_JOSE_FRIAS", my_songs_json).commit();*/
 
             }
         });
@@ -131,6 +140,19 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
             public void onClick(View v) {
                 Create_Song newF = new Create_Song();
                 newF.show(getSupportFragmentManager(), "new_song");
+            }
+        });
+
+        final TextView lyrics = findViewById(R.id.lyric_editor);
+        lyrics.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                TextView tv = findViewById(R.id.song_title);
+                Intent intent = new Intent(Songs.this, Lyric_Editor.class);
+                intent.putExtra("base_lyrics", lyrics.getText().toString());
+                intent.putExtra("song_title", tv.getText().toString());
+
+                startActivity(intent);
             }
         });
 

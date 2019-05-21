@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // card on click
-        card.setOnClickListener(new View.OnClickListener(){
+        title.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent post = new Intent(MainActivity.this, PostActivity.class);
