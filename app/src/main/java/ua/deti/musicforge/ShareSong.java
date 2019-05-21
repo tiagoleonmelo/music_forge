@@ -48,23 +48,23 @@ public class ShareSong extends DialogFragment {
                         }
 
                         // fetch the prefs
-                        String posted_songs_json = prefs.getString("posted_songs_v6", "");
+                        String posted_songs_json = prefs.getString("posted_songs_v7", "");
                         ArrayList<Post> posted_songs = gson.fromJson(posted_songs_json, new TypeToken<List<Post>>() {
                         }.getType());
                         posted_songs.add(new Post(new Musica(title,lyrics), caption.getText().toString(), "Beethoven"));
                         posted_songs_json = gson.toJson(posted_songs);
-                        prefs.edit().putString("posted_songs_v6",posted_songs_json).commit();
+                        prefs.edit().putString("posted_songs_v7",posted_songs_json).commit();
 
 
                         // unpickle, update and commit both jsons
-                        String user_songs_json = prefs.getString("user_songs_v6", "");
+                        String user_songs_json = prefs.getString("user_songs_v7", "");
                         if(user_songs_json.equalsIgnoreCase("")){
                             ArrayList<Post> user_songs = new ArrayList<>();
                             user_songs.add(new Post(new Musica(title,lyrics), caption.getText().toString()));
 
                             user_songs_json = gson.toJson(user_songs);
 
-                            prefs.edit().putString("user_songs_v6",user_songs_json).commit();
+                            prefs.edit().putString("user_songs_v7",user_songs_json).commit();
                         }else{
                             ArrayList<Post> user_songs = gson.fromJson(user_songs_json, new TypeToken<List<Post>>() {
                             }.getType());
@@ -72,7 +72,7 @@ public class ShareSong extends DialogFragment {
 
                             user_songs_json = gson.toJson(user_songs);
 
-                            prefs.edit().putString("user_songs_v6",user_songs_json).commit();
+                            prefs.edit().putString("user_songs_v7",user_songs_json).commit();
                         }
 
                         startActivity(intent);

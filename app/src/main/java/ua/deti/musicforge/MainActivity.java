@@ -3,10 +3,7 @@ package ua.deti.musicforge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,17 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         rpc = getIntent().getIntExtra("rpc",-1);
 
-        if(pref.contains("posted_songs_v6")) {
-            posted_songs_json = pref.getString("posted_songs_v6", "");
+        if(pref.contains("posted_songs_v7")) {
+            posted_songs_json = pref.getString("posted_songs_v7", "");
             ArrayList<Post> posted_songs = gson.fromJson(posted_songs_json, new TypeToken<List<Post>>() {
             }.getType());
 
@@ -57,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 posted_songs_json = gson.toJson(posted_songs);
-                pref.edit().putString("posted_songs_v6",posted_songs_json).commit();
+                pref.edit().putString("posted_songs_v7",posted_songs_json).commit();
             }
 
         }else{
@@ -76,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             posted_songs_json = gson.toJson(posted_songs);
-            pref.edit().putString("posted_songs_v6",posted_songs_json).commit();
+            pref.edit().putString("posted_songs_v7",posted_songs_json).commit();
         }
 
         // TODO: Add AUDIO (mp3), SCRIPT (pdf) and VIDEOCLIP (mp4) to the Songs page
@@ -140,16 +134,20 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<Integer> flag_overkill = new ArrayList<>();
 
         final SharedPreferences pref = getSharedPreferences("app",MODE_PRIVATE);
-        final String post_json = pref.getString("posted_songs_v6", "");
+        final String post_json = pref.getString("posted_songs_v7", "");
         final Gson gson = new Gson();
         final ArrayList<Post> posts = gson.fromJson(post_json, new TypeToken<List<Post>>() {
         }.getType());
 
-        for(Post p : posts){
-            if(p.getPoster().equalsIgnoreCase(user_) && p.getCaption().equalsIgnoreCase(caption_)){
-                like.setText("Like ("+p.getLikes()+")");
-                break;
+        if(posts != null) {
+
+            for (Post p : posts) {
+                if (p.getPoster().equalsIgnoreCase(user_) && p.getCaption().equalsIgnoreCase(caption_)) {
+                    like.setText("Like (" + p.getLikes() + ")");
+                    break;
+                }
             }
+
         }
 
         // card on click
@@ -193,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String post_json_ = gson.toJson(posts);
-                pref.edit().putString("posted_songs_v6", post_json_).commit();
+                pref.edit().putString("posted_songs_v7", post_json_).commit();
             }
         });
 

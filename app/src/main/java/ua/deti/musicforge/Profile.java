@@ -45,8 +45,8 @@ public class Profile extends AppCompatActivity {
         TextView name = findViewById(R.id.tvName);
         name.setText(userName);
 
-        if (pref.contains("posted_songs_v6")) {
-            user_songs_json = pref.getString("posted_songs_v6", "");
+        if (pref.contains("posted_songs_v7")) {
+            user_songs_json = pref.getString("posted_songs_v7", "");
             ArrayList<Post> user_songs = gson.fromJson(user_songs_json, new TypeToken<List<Post>>() {
             }.getType());
 
@@ -60,7 +60,7 @@ public class Profile extends AppCompatActivity {
                 }
 
                 user_songs_json = gson.toJson(user_songs);
-                pref.edit().putString("posted_songs_v6", user_songs_json).commit();
+                pref.edit().putString("posted_songs_v7", user_songs_json).commit();
             }
 
         }
@@ -155,7 +155,7 @@ public class Profile extends AppCompatActivity {
         final String title_again = title_;
 
         final SharedPreferences pref = getSharedPreferences("app",MODE_PRIVATE);
-        String post_json = pref.getString("posted_songs_v6", "");
+        String post_json = pref.getString("posted_songs_v7", "");
         final Gson gson = new Gson();
         final ArrayList<Post> posts = gson.fromJson(post_json, new TypeToken<List<Post>>() {
         }.getType());
@@ -195,7 +195,7 @@ public class Profile extends AppCompatActivity {
                 }
 
                 String post_json_ = gson.toJson(posts);
-                pref.edit().putString("posted_songs_v6", post_json_).commit();
+                pref.edit().putString("posted_songs_v7", post_json_).commit();
 
             }
         });

@@ -72,7 +72,7 @@ public class Search extends AppCompatActivity {
                 }
 
                 boolean flag = true;
-                String posts_json = prefs.getString("posted_songs_v6","");
+                String posts_json = prefs.getString("posted_songs_v7","");
                 final ArrayList<Post> posts = gson.fromJson(posts_json, new TypeToken<List<Post>>() {
                 }.getType());
 

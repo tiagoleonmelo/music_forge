@@ -34,7 +34,7 @@ public class PostActivity extends AppCompatActivity {
         String user = getIntent().getStringExtra("poster");
         String caption = getIntent().getStringExtra("caption");
         SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
-        String posts_json = prefs.getString("posted_songs_v6", "");
+        String posts_json = prefs.getString("posted_songs_v7", "");
         Gson gson = new Gson();
         ArrayList<Post> posts = gson.fromJson(posts_json, new TypeToken<List<Post>>() {
         }.getType());
