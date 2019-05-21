@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -117,10 +118,25 @@ public class Search extends AppCompatActivity {
         parentLinearLayout.addView(card, parentLinearLayout.getChildCount());
 
         final TextView user = card.findViewById(R.id.userName);
+        final ImageView imag = card.findViewById(R.id.avatar);
+
 
         user.setText(username);
 
         user.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent profile = new Intent(Search.this, Profile.class);
+                if(user.getText().toString().equalsIgnoreCase("Beethoven")){
+                    startActivity(profile);
+                }else{
+                    profile.putExtra("user_name",user.getText().toString() );
+                    startActivity(profile);
+                }
+            }
+        });
+
+        imag.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent profile = new Intent(Search.this, Profile.class);

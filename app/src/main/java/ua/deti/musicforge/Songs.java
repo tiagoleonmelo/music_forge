@@ -53,12 +53,6 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
         // Spinner setup
         Spinner dropdown = findViewById(R.id.spinner1);
 
-        boolean contains = false;
-
-        /*for(Musica m : this.my_songs){
-            titles.add(m.getTitle());
-        }*/
-
         for(int i = my_songs.size()-1; i >= 0; i--){
             titles.add(my_songs.get(i).getTitle());
         }
@@ -130,6 +124,17 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
             }
         });
 
+        //New song button
+        Button new_song = findViewById(R.id.new_song);
+        new_song.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Create_Song newF = new Create_Song();
+                newF.show(getSupportFragmentManager(), "new_song");
+            }
+        });
+
+
         // Add file buttons
         Button add_file1 = findViewById(R.id.add_file);
         Button add_file2 = findViewById(R.id.add_file2);
@@ -194,21 +199,12 @@ public class Songs extends AppCompatActivity implements AdapterView.OnItemSelect
             }
         }
 
-        if (parent.getItemAtPosition(pos).toString().equalsIgnoreCase("Create new song...")) {
-
-            // Add dialog here
-            Create_Song newF = new Create_Song();
-            newF.show(getSupportFragmentManager(), "new_song");
-
-        } else {
-
-            // updating activity
-            tv.setText(parent.getItemAtPosition(pos).toString());
-            for(Musica m : my_songs){
-                if(m.getTitle().equals(parent.getItemAtPosition(pos).toString())){
-                    tv1.setText(m.getLyrics());
-                    break;
-                }
+        // updating activity
+        tv.setText(parent.getItemAtPosition(pos).toString());
+        for(Musica m : my_songs){
+            if(m.getTitle().equals(parent.getItemAtPosition(pos).toString())){
+                tv1.setText(m.getLyrics());
+                break;
             }
         }
 

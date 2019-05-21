@@ -26,6 +26,7 @@
         android:layout_marginTop="40dp"
         android:text="@string/user1"
         android:textSize="18sp"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.009"
         app:layout_constraintStart_toEndOf="@+id/avatar"
