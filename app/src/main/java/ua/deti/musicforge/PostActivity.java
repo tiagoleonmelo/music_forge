@@ -12,8 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,16 +37,16 @@ public class PostActivity extends AppCompatActivity {
         String caption = getIntent().getStringExtra("caption");
         SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
         String posts_json = prefs.getString("posted_songs_v7", "");
-        Gson gson = new Gson();
-        ArrayList<Post> posts = gson.fromJson(posts_json, new TypeToken<List<Post>>() {
+        final Gson gson = new Gson();
+        final ArrayList<Post> posts = gson.fromJson(posts_json, new TypeToken<List<Post>>() {
         }.getType());
         final Post post = new Post();
 
         for(Post p : posts){
             if(p.getCaption().equalsIgnoreCase(caption) && p.getPoster().equalsIgnoreCase(user)){
-                TextView userName = findViewById(R.id.user_name);
-                TextView caption_ = findViewById(R.id.caption);
-                TextView title = findViewById(R.id.song_name);
+                final TextView userName = findViewById(R.id.user_name);
+                final TextView caption_ = findViewById(R.id.caption);
+                final TextView title = findViewById(R.id.song_name);
                 TextView lyrics = findViewById(R.id.lyrics);
 
                 userName.setText(user);
@@ -65,6 +67,57 @@ public class PostActivity extends AppCompatActivity {
                     onAddComment(c.getUser(), c.getComment(), i);
                     i++;
                 }
+
+                final ArrayList<Integer> flag_overkill = new ArrayList<>();
+                final SharedPreferences pref = getSharedPreferences("app",MODE_PRIVATE);
+
+                final ImageButton like_btn = findViewById(R.id.button_like);
+                final TextView like = findViewById(R.id.like_txt);
+                like.setText(""+p.getLikes());
+                like_btn.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        if(!flag_overkill.contains(0)) {
+                            String s = "You liked the song " + title.getText().toString() + "!";
+                            Toast.makeText(getBaseContext(), s, Toast.LENGTH_SHORT).show();
+                            flag_overkill.add(0);
+                            for(Post p : posts){
+                                if(p.getPoster().equalsIgnoreCase(userName.getText().toString()) && p.getCaption().equalsIgnoreCase(caption_.getText().toString())){
+                                    p.like();
+                                    like.setText(""+p.getLikes());
+                                    like_btn.setImageResource(R.drawable.hearts_filled);
+                                    break;
+                                }
+                            }
+
+                        }else{
+                            String s = "You unliked the song " + title.getText().toString() + "!";
+                            Toast.makeText(getBaseContext(), s, Toast.LENGTH_SHORT).show();
+                            flag_overkill.remove(0);
+                            for(Post p : posts){
+                                if(p.getPoster().equalsIgnoreCase(userName.getText().toString()) && p.getCaption().equalsIgnoreCase(caption_.getText().toString())){
+                                    p.unlike();
+                                    like.setText(""+p.getLikes());
+                                    like_btn.setImageResource(R.drawable.hearts);
+                                    break;
+                                }
+                            }
+                        }
+
+                        String post_json_ = gson.toJson(posts);
+                        pref.edit().putString("posted_songs_v7", post_json_).commit();
+                    }
+                });
+
+                final ImageButton donate = findViewById(R.id.button_donate);
+                donate.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getBaseContext(), "You have insufficient funds. ¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                break;
             }
         }
 
@@ -78,8 +131,10 @@ public class PostActivity extends AppCompatActivity {
                 post.addComment(new Comment("Beethoven", com.getText().toString()));
                 onAddComment("Beethoven", com.getText().toString(), j);
                 j++;
+                com.setText("");
             }
         });
+
 
     }
 

@@ -3,6 +3,7 @@ package ua.deti.musicforge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
         TextView caption = card.findViewById(R.id.caption);
         TextView lyric = card.findViewById(R.id.lyrics);
 
-        final Button like = card.findViewById(R.id.button_like);
+        final ImageButton like_btn = card.findViewById(R.id.button_like);
+        final TextView like = card.findViewById(R.id.like_txt);
         final ArrayList<Integer> flag_overkill = new ArrayList<>();
 
         final SharedPreferences pref = getSharedPreferences("app",MODE_PRIVATE);
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
             for (Post p : posts) {
                 if (p.getPoster().equalsIgnoreCase(user_) && p.getCaption().equalsIgnoreCase(caption_)) {
-                    like.setText("Like (" + p.getLikes() + ")");
+                    like.setText(""+ p.getLikes());
                     break;
                 }
             }
@@ -162,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        like.setOnClickListener(new View.OnClickListener(){
+        like_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if(!flag_overkill.contains(0)) {
@@ -172,7 +175,8 @@ public class MainActivity extends AppCompatActivity {
                     for(Post p : posts){
                         if(p.getPoster().equalsIgnoreCase(user_) && p.getCaption().equalsIgnoreCase(caption_)){
                             p.like();
-                            like.setText("Liked ("+p.getLikes()+")");
+                            like.setText(""+p.getLikes());
+                            like_btn.setImageResource(R.drawable.hearts_filled);
                             break;
                         }
                     }
@@ -184,7 +188,8 @@ public class MainActivity extends AppCompatActivity {
                     for(Post p : posts){
                         if(p.getPoster().equalsIgnoreCase(user_) && p.getCaption().equalsIgnoreCase(caption_)){
                             p.unlike();
-                            like.setText("Like ("+p.getLikes()+")");
+                            like.setText(""+p.getLikes());
+                            like_btn.setImageResource(R.drawable.hearts);
                             break;
                         }
                     }
@@ -195,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button com = card.findViewById(R.id.button_comment);
+        final ImageButton com = card.findViewById(R.id.button_comment);
         com.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -206,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button donate = card.findViewById(R.id.button_donate);
+        final ImageButton donate = card.findViewById(R.id.button_donate);
         donate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

@@ -3,6 +3,7 @@ package ua.deti.musicforge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -200,7 +202,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        final Button com = card.findViewById(R.id.button_comment);
+        final ImageButton com = card.findViewById(R.id.button_comment);
         com.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -211,13 +213,33 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        final Button donate = card.findViewById(R.id.button_donate);
+        final ImageButton donate = card.findViewById(R.id.button_donate);
         donate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Toast.makeText(getBaseContext(), "You have insufficient funds. ¯\\_(ツ)_/¯", Toast.LENGTH_SHORT).show();
             }
         });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.out);
+        fab.bringToFront();
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile.this, Login.class);
+                startActivity(intent);
+            }
+        });
+
+        FloatingActionButton fab1 = findViewById(R.id.edit_fab);
+        FloatingActionButton fab2 = findViewById(R.id.settings);
+
+        if(getIntent().getStringExtra("user_name") != null){
+            fab.hide();
+            fab1.hide();
+            fab2.hide();
+        }
+
 
     }
 }

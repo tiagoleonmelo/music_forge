@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:clickable="true"
-    >
+    android:clickable="true">
 
 
     <android.support.constraint.ConstraintLayout
@@ -28,8 +27,9 @@
             android:layout_marginRight="4dp"
             android:clickable="true"
             android:text="@string/user_one"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:fontFamily="sans-serif-condensed"
+            app:fontFamily="@font/basic"
             app:layout_constraintEnd_toStartOf="@+id/avatar"
             app:layout_constraintTop_toTopOf="parent"
             tools:focusable="auto" />
@@ -43,7 +43,9 @@
             android:layout_marginTop="8dp"
             android:clickable="true"
             android:text="@string/song_one"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:fontFamily="@font/basic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -55,12 +57,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="@string/caption_one"
+            app:fontFamily="@font/basic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,44 +79,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/caption" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_like"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/like"
+            android:scaleType="fitCenter"
+            android:src="@drawable/hearts"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/like_txt"
             app:layout_constraintTop_toBottomOf="@+id/lyrics" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_comment"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/comment"
+            android:scaleType="fitCenter"
+            android:src="@drawable/comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lyrics" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_donate"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/donate"
+            android:scaleType="fitCenter"
+            android:src="@drawable/donate"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lyrics" />
+            app:layout_constraintStart_toEndOf="@+id/button_comment"
+            app:layout_constraintTop_toBottomOf="@+id/lyrics"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/avatar"
@@ -156,6 +164,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/music_note" />
 
+        <TextView
+            android:id="@+id/like_txt"
+            android:layout_width="17dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            app:fontFamily="@font/basic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_comment" />
+
 
     </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView>

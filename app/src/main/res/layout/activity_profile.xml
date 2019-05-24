@@ -57,6 +57,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/edit_fab"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:tint="#fff"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/pencil" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/settings"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:tint="#fff"
+                app:fabCustomSize="45dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_fab"
+                app:srcCompat="@drawable/settings" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/out"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:fabCustomSize="45dp"
+                android:tint="#fff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/settings"
+                app:srcCompat="@drawable/out" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="466dp"
@@ -94,6 +139,8 @@
                 </ScrollView>
 
             </LinearLayout>
+
+
 
         </android.support.constraint.ConstraintLayout>
 

@@ -14,6 +14,23 @@
         android:elevation="2dp">
 
         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Lyrics:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/cutive_mono"
+            app:layout_constraintBottom_toTopOf="@+id/lyrics"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/caption"
+            app:layout_constraintVertical_bias="0.833" />
+
+        <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,8 +41,9 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:text="@string/user_one"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:fontFamily="sans-serif-condensed"
+            app:fontFamily="@font/basic"
             app:layout_constraintEnd_toStartOf="@+id/avatar"
             app:layout_constraintTop_toTopOf="parent"
             tools:focusable="auto" />
@@ -38,7 +56,9 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:text="@string/song_one"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:fontFamily="@font/basic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageView2"
@@ -50,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:text="@string/caption_one"
@@ -63,44 +83,49 @@
             android:id="@+id/lyrics"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="44dp"
             android:textSize="18sp"
             app:fontFamily="@font/cutive_mono"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/caption" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_like"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:text="@string/like"
-            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/hearts"
+            app:layout_constraintEnd_toStartOf="@+id/like_txt"
             app:layout_constraintTop_toBottomOf="@+id/lyrics" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_comment"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="8dp"
-            android:text="@string/comment"
+            android:scaleType="fitCenter"
+            android:src="@drawable/comment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lyrics" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_donate"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:text="@string/donate"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/donate"
+            app:layout_constraintStart_toEndOf="@+id/button_comment"
             app:layout_constraintTop_toBottomOf="@+id/lyrics" />
 
         <ImageView
@@ -176,6 +201,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/music_note" />
+
+        <TextView
+            android:id="@+id/like_txt"
+            android:layout_width="17dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            app:fontFamily="@font/basic"
+            app:layout_constraintEnd_toStartOf="@+id/button_comment"
+            app:layout_constraintTop_toBottomOf="@+id/lyrics" />
 
 
     </android.support.constraint.ConstraintLayout>
